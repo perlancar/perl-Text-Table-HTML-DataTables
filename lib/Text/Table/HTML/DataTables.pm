@@ -31,11 +31,15 @@ sub table {
     my @table;
 
     # load css/js
+    push @table, "<html>\n";
+    push @table, "<head>\n";
     push @table, qq(<link rel="stylesheet" type="text/css" href="file://)._escape_uri("$dist_dir/datatables-1.10.13/css/jquery.dataTables.min.css").qq(">\n);
     push @table, qq(<script src="file://)._escape_uri("$dist_dir/jquery-2.2.4/jquery-2.2.4.min.js").qq("></script>\n);
     push @table, qq(<script src="file://)._escape_uri("$dist_dir/datatables-1.10.13/js/jquery.dataTables.min.js").qq("></script>\n);
     push @table, '<script>$(document).ready(function() { $("table").DataTable(); });</script>'."\n\n";
+    push @table, "</head>\n\n";
 
+    push @table, "<body>\n";
     push @table, "<table>\n";
 
     # then the data
@@ -66,6 +70,9 @@ sub table {
 
     push @table, "</tbody>\n";
     push @table, "</table>\n";
+    push @table, "</body>\n\n";
+
+    push @table, "</html>\n";
 
     return join("", grep {$_} @table);
 }
