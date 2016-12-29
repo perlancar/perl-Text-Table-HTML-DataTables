@@ -3,18 +3,16 @@ package Text::Table::HTML::DataTables;
 # DATE
 # VERSION
 
-#IFUNBUILT
 use 5.010001;
 use strict;
 use warnings;
-#END IFUNBUILT
 
 sub _encode {
     state $load = do { require HTML::Entities };
     HTML::Entities::encode_entities(shift);
 }
 
-sub _escape_path {
+sub _escape_uri {
     require URI::Escape;
     URI::Escape::uri_escape(shift, "^A-Za-z0-9\-\._~/");
 }
@@ -33,12 +31,9 @@ sub table {
     my @table;
 
     # load css/js
-    push @table, qq(<link rel="stylesheet" type="text/css" href=").
-        _escape_uri("file:$dist_dir/datatables-1.10.13/css/jquery.dataTables.min.css").qq("\n);
-    push @table, qq(<script src=").
-        _escape_uri("file:$dist_dir/jquery-2.2.4/jquery-2.2.4.min.js").qq("></script>\n);
-    push @table, qq(<script src=").
-        _escape_uri("file:$dist_dir/datatables-1.10.13/js/jquery.dataTables.min.css").qq("></script>\n);
+    push @table, qq(<link rel="stylesheet" type="text/css" href="file://)._escape_uri("$dist_dir/datatables-1.10.13/css/jquery.dataTables.min.css").qq(">\n);
+    push @table, qq(<script src="file://)._escape_uri("$dist_dir/jquery-2.2.4/jquery-2.2.4.min.js").qq("></script>\n);
+    push @table, qq(<script src="file://)._escape_uri("$dist_dir/datatables-1.10.13/js/jquery.dataTables.min.js").qq("></script>\n);
     push @table, '<script>$(document).ready(function() { $("table").DataTable(); });</script>'."\n\n";
 
     push @table, "<table>\n";
@@ -121,9 +116,9 @@ directory), so you can filter and sort the table in the browser.
 
 The example shown in the SYNOPSIS generates the following table:
 
- <link rel="stylesheet" type="text/css" href="file:/home/ujang/perl5/perlbrew/perls/perl-5.24.0/lib/site_perl/5.24.0/auto/share/dist/Text-Table-HTML-DataTables/datatables-1.10.13/css/jquery.dataTables.min.css">
- <script src="file:/home/ujang/perl5/perlbrew/perls/perl-5.24.0/lib/site_perl/5.24.0/auto/share/dist/Text-Table-HTML-DataTables/jquery-2.2.4/jquery-2.2.4.min.js"></script>
- <script src="file:/home/ujang/perl5/perlbrew/perls/perl-5.24.0/lib/site_perl/5.24.0/auto/share/dist/Text-Table-HTML-DataTables/datatables-1.10.13/js/jquery.dataTables.min.js"></script>
+ <link rel="stylesheet" type="text/css" href="file:///home/ujang/perl5/perlbrew/perls/perl-5.24.0/lib/site_perl/5.24.0/auto/share/dist/Text-Table-HTML-DataTables/datatables-1.10.13/css/jquery.dataTables.min.css">
+ <script src="file:///home/ujang/perl5/perlbrew/perls/perl-5.24.0/lib/site_perl/5.24.0/auto/share/dist/Text-Table-HTML-DataTables/jquery-2.2.4/jquery-2.2.4.min.js"></script>
+ <script src="file:///home/ujang/perl5/perlbrew/perls/perl-5.24.0/lib/site_perl/5.24.0/auto/share/dist/Text-Table-HTML-DataTables/datatables-1.10.13/js/jquery.dataTables.min.js"></script>
  <script>$(document).ready(function() { $("table").DataTable(); });</script>
 
  <table>
