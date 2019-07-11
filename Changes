@@ -1,10 +1,10 @@
-0.002   2016-12-29 (PERLANCAR)
+0.002   2016-12-29  Released-By: PERLANCAR
 
 	- Output <html> so that browsers like Opera and Chrome view the
 	  output as HTML even though the filename does not have .html
 	  extension.
 
 
-0.001   2016-12-29 (PERLANCAR)
+0.001   2016-12-29  Released-By: PERLANCAR
 
         - First release.
