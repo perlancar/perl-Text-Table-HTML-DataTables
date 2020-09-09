@@ -1,3 +1,9 @@
+0.003   2020-09-09  Released-By: PERLANCAR; Urgency: medium
+
+	- Patch bundled datatables 1.10.13: allow page size of 250, 500, 1000,
+	  2500, 5000 rows.
+
+
 0.002   2016-12-29  Released-By: PERLANCAR
 
 	- Output <html> so that browsers like Opera and Chrome view the
