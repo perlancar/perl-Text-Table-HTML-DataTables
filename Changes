@@ -1,3 +1,8 @@
+0.005   2020-11-05  Released-By: PERLANCAR; Urgency: medium
+
+	- Add custom operator Does Not Contain to SearchBuilder plugin.
+
+
 0.004   2020-11-05  Released-By: PERLANCAR; Urgency: medium
 
 	- Update datatables from 1.10.13 to 1.10.22 (use the unminified version
