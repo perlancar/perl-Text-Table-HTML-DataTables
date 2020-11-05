@@ -1,3 +1,10 @@
+0.004   2020-11-05  Released-By: PERLANCAR; Urgency: medium
+
+	- Update datatables from 1.10.13 to 1.10.22 (use the unminified version
+	  for patching convenience), add some datatables plugins. Currently
+	  enabled plugin is SearchBuilder.
+
+
 0.003   2020-09-09  Released-By: PERLANCAR; Urgency: medium
 
 	- Patch bundled datatables 1.10.13: allow page size of 250, 500, 1000,
