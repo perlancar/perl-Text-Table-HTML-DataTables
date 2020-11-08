@@ -4513,6 +4513,7 @@
 				if ( word.substring(0, 2) === '\\-' ) {
 					var m = word.match( /^\\-(.*)/ );
 					word = m[1];
+					if ( word === '' ) return '';
 					negate = true;
 				}
 				if ( word.charAt(0) === '"' ) {
