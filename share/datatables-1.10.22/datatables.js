@@ -4509,15 +4509,21 @@
 			 * ^(?=.*?\bone\b)(?=.*?\btwo three\b)(?=.*?\bfour\b).*$
 			 */
 			var a = $.map( search.match( /"[^"]+"|[^ ]+/g ) || [''], function ( word ) {
+				var negate = false;
+				if ( word.substring(0, 2) === '\\-' ) {
+					var m = word.match( /^\\-(.*)/ );
+					word = m[1];
+					negate = true;
+				}
 				if ( word.charAt(0) === '"' ) {
 					var m = word.match( /^"(.*)"$/ );
 					word = m ? m[1] : word;
 				}
 
-				return word.replace('"', '');
+				return (negate ? '(?!.*' : '(?=.*') + word.replace('"', '') + ')';
 			} );
 
-			search = '^(?=.*?'+a.join( ')(?=.*?' )+').*$';
+		    search = '^'+a.join('')+'.*$';
 		}
 
 		return new RegExp( search, caseInsensitive ? 'i' : '' );
