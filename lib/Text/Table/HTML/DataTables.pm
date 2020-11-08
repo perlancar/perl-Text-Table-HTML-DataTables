@@ -38,47 +38,15 @@ sub table {
     push @table, "<head>\n";
 
     push @table, qq(<link rel="stylesheet" type="text/css" href="file://)._escape_uri("$dist_dir/datatables-1.10.22/datatables.css").qq(">\n);
-    #push @table, qq(<link rel="stylesheet" type="text/css" href="file://)._escape_uri("$dist_dir/Buttons-1.6.5/css/buttons.dataTables.css").qq(">\n);
-    push @table, qq(<link rel="stylesheet" type="text/css" href="file://)._escape_uri("$dist_dir/SearchBuilder-1.0.0/css/searchBuilder.dataTables.css").qq(">\n);
-
     push @table, qq(<script src="file://)._escape_uri("$dist_dir/jquery-2.2.4/jquery-2.2.4.min.js").qq("></script>\n);
     push @table, qq(<script src="file://)._escape_uri("$dist_dir/datatables-1.10.22/datatables.js").qq("></script>\n);
-    #push @table, qq(<script src="file://)._escape_uri("$dist_dir/Buttons-1.6.5/js/buttons.colVis.js").qq("></script>\n);
-    #push @table, qq(<script src="file://)._escape_uri("$dist_dir/Buttons-1.6.5/js/buttons.print.js").qq("></script>\n);
-    push @table, qq(<script src="file://)._escape_uri("$dist_dir/SearchBuilder-1.0.0/js/dataTables.searchBuilder.js").qq("></script>\n);
-    #push @table, qq(<script src="file://)._escape_uri("$dist_dir/SearchBuilder-1.0.0/js/searchBuilder.dataTables.js").qq("></script>\n);
-
-    # not yet
-    # <link rel="stylesheet" type="text/css" href="ColReorder-1.5.2/css/colReorder.dataTables.css"/>
-    # <link rel="stylesheet" type="text/css" href="FixedColumns-3.3.1/css/fixedColumns.dataTables.css"/>
-    # <link rel="stylesheet" type="text/css" href="FixedHeader-3.1.7/css/fixedHeader.dataTables.css"/>
-    # <link rel="stylesheet" type="text/css" href="KeyTable-2.5.3/css/keyTable.dataTables.css"/>
-
-    # <script type="text/javascript" src="Buttons-1.6.5/js/dataTables.buttons.js"></script>
-    # <script type="text/javascript" src="Buttons-1.6.5/js/buttons.colVis.js"></script>
-    # <script type="text/javascript" src="Buttons-1.6.5/js/buttons.print.js"></script>
-    # <script type="text/javascript" src="ColReorder-1.5.2/js/dataTables.colReorder.js"></script>
-    # <script type="text/javascript" src="FixedColumns-3.3.1/js/dataTables.fixedColumns.js"></script>
-    # <script type="text/javascript" src="FixedHeader-3.1.7/js/dataTables.fixedHeader.js"></script>
-    # <script type="text/javascript" src="KeyTable-2.5.3/js/dataTables.keyTable.js"></script>
 
     push @table, '<script>';
     my $dt_opts = {
         dom => 'lQfrtip',
-        #buttons => ['colVis', 'print'],
+        buttons => ['colvis', 'print'],
     };
     push @table, 'var dt_opts = ', JSON::PP::encode_json($dt_opts), '; ';
-#     push @table, q(dt_opts['searchBuilder'] = {conditions: {string: {
-# 	        '!contains': {
-# 	            conditionName: 'Does Not Contain',
-# 	            init: function (that, fn, preDefined) { return $('<input/>') },
-# 	            inputValue: null,
-# 	            isInputValid: null,
-# 	            search: function (value, comparison) {
-# 	                return !value.toLowerCase().includes(comparison[0].toLowerCase());
-# 	            }
-#                 }
-# }}}; );
     push @table, '$(document).ready(function() { $("table").DataTable(dt_opts); });';
     push @table, '</script>'."\n\n";
     push @table, "</head>\n\n";
