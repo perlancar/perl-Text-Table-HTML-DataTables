@@ -1,3 +1,9 @@
+0.007   2020-11-08  Released-By: PERLANCAR; Urgency: medium
+
+	- [ux] Don't exclude all rows when user type '-' term in search
+	  box.
+
+
 0.006   2020-11-08  Released-By: PERLANCAR; Urgency: medium
 
 	- Support negative search with dash prefix syntax (-foo), a la
