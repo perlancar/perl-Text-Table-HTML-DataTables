@@ -1,13 +1,13 @@
 package Text::Table::HTML::DataTables;
 
+use 5.010001;
+use strict;
+use warnings;
+
 # AUTHORITY
 # DATE
 # DIST
 # VERSION
-
-use 5.010001;
-use strict;
-use warnings;
 
 sub _encode {
     state $load = do { require HTML::Entities };
@@ -25,6 +25,7 @@ sub table {
 
     my %params = @_;
     my $rows = $params{rows} or die "Must provide rows!";
+    my $default_length = int($params{default_length} // 1000);
 
     my $max_index = _max_array_index($rows);
 
@@ -47,7 +48,11 @@ sub table {
         buttons => ['colvis', 'print'],
     };
     push @table, 'var dt_opts = ', JSON::PP::encode_json($dt_opts), '; ';
-    push @table, '$(document).ready(function() { $("table").DataTable(dt_opts); });';
+    push @table, '$(document).ready(function() { ', (
+        '$("table").DataTable(dt_opts); ',
+        '$("select[name=DataTables_Table_0_length]").val('.$default_length.'); ', # XXX element name should not be hardcoded, and this only works for the first datatable
+        '$("select[name=DataTables_Table_0_length]").trigger("change"); ',        # doesn't get triggered automatically by previous line
+    ), '});';
     push @table, '</script>'."\n\n";
     push @table, "</head>\n\n";
 
