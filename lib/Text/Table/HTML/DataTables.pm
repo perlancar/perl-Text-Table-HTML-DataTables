@@ -97,7 +97,7 @@ sub table {
 # FROM_MODULE: PERLANCAR::List::Util::PP
 # BEGIN_BLOCK: max
 sub max {
-    return undef unless @_;
+    return undef unless @_; ## no critic: Subroutines::ProhibitExplicitReturnUndef
     my $res = $_[0];
     my $i = 0;
     while (++$i < @_) { $res = $_[$i] if $_[$i] > $res }
