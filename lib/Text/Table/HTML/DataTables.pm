@@ -38,7 +38,7 @@ sub table {
     push @table, "<html>\n";
     push @table, "<head>\n";
 
-    push @table, qq(<title>).HTML::Entities::encode_entities($params{title}).qq(</title>\n) if defined $params{title};
+    push @table, qq(<title>).HTML::Entities::encode_entities($params{caption}).qq(</title>\n) if defined $params{caption};
 
     my $jquery_ver = '2.2.4';
     my $datatables_ver = '1.10.22';
@@ -87,7 +87,7 @@ sub table {
 
     push @table, "<body>\n";
     push @table, "<table>\n";
-    push @table, qq(<caption>).HTML::Entities::encode_entities($params{title}).qq(</caption>\n) if defined $params{title};
+    push @table, qq(<caption>).HTML::Entities::encode_entities($params{caption}).qq(</caption>\n) if defined $params{caption};
 
     # then the data
     my $i = -1;
@@ -216,11 +216,11 @@ The C<table> function understands these parameters, which are passed as a hash:
 Takes an array reference which should contain one or more rows of data, where
 each row is an array reference.
 
-=item * title
+=item * caption
 
 Optional. Str. If set, will output a HTML C<< <title> >> element in the HTML
 head as well as table C<< <caption> >> element in the HTML body containing the
-given title. The title will be HTML-encoded.
+provided caption. The caption will be HTML-encoded.
 
 =item * default_length
 
