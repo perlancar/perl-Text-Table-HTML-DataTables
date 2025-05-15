@@ -11,7 +11,16 @@ use warnings;
 
 sub _encode {
     state $load = do { require HTML::Entities };
-    HTML::Entities::encode_entities(shift);
+    my $val = shift;
+    # encode_entities change 0 (false) to empty string so we need to filter the
+    # value first
+    if (!defined $val) {
+        "";
+    } elsif (!$val) {
+        "$val";
+    } else {
+        HTML::Entities::encode_entities($val);
+    }
 }
 
 sub _escape_uri {
